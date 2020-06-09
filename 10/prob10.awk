@@ -4,20 +4,18 @@
 # The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 # Find the sum of all the primes below two million.
 
-
-#!/usr/bin/awk -f
-
-BEGIN{
+BEGIN {
   sum = 2
-  for (i=oddify(2000000); i>2; i=i-2){
-    flag=1 #prime
+
+  for (i = oddify(2000000); i > 2; i = i-2) {
+    is_prime = 1 #prime
     for(j=3; j<=ceil(sqrt(i)); j=j+2){
       if (i%j==0){
-        flag=0 #not prime
+        is_prime=0 #not prime
         break
       }
     }
-    if (flag==1){ sum += i }
+    if (is_prime==1){ sum += i }
   }
   print sum
 }
