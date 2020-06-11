@@ -18,5 +18,18 @@
 
 
 BEGIN {
-  print hello
+  i = 1
+  while (factors(num)<500) {
+    num += i
+    i++
+ }
+ print num
+}
+
+function factors (n) {
+  fact = 0
+  for (i = 1; i<=n; i++) {
+    if (n % i == 0) fact++
+  }
+  return fact
 }
