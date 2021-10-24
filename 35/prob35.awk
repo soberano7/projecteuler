@@ -14,13 +14,27 @@ BEGIN {
     if(validate(num)){ # 1 - true, 0 - false
       # find all circulars of the number
       newnum = get_circular(num)
-      #isprime(newnum)
-      while(newnum != num){
-        newnum = get_circular(newnum)
-        #isprime(newnum)
+      if(isprime(newnum)){
+        while(newnum != num){
+          newnum = get_circular(newnum)
+          if(!isprime(newnum)){continue}
+        }
       }
     }
   }
+
+}
+
+
+function isprime(n){
+  ans = 1
+  for (i = 2; i < n/2; i += 1){
+    if(n % i == 0){
+      ans = 0
+      return ans
+    }
+  }
+  return ans
 }
 
 function get_circular(n){
