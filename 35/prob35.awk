@@ -9,15 +9,48 @@
 
 BEGIN {
 
-  # find all circulars of the number
-  num = 12345
-  div = 10
-  ans = int(num / div)
-
-  while (ans > 10){
-    ans = int(num / div)
-    num -= ans * div
-    div = div * 10
+  num = 179
+  for (num = 1; num < 1000000; num += 2){
+    if(validate(num)){ # 1 - true, 0 - false
+      # find all circulars of the number
+      newnum = get_circular(num)
+      #isprime(newnum)
+      while(newnum != num){
+        newnum = get_circular(newnum)
+        #isprime(newnum)
+      }
+    }
   }
-  print num
+}
+
+function get_circular(n){
+  multiplier = get_multiplier(n)
+  last_digit = n % 10
+  except_last_digit = int(n / 10)
+
+  return (last_digit * multiplier + except_last_digit)
+}
+
+function get_multiplier(n){
+
+  t = 0
+  while (n > 10){
+    n = int(n / 10)
+    t += 1
+  }
+
+  return 10**t
+}
+
+function validate(n){
+  ans = 1
+  while (n > 0){
+    m = n % 10
+    if (m == 0 || m == 2 || m == 4 || m == 5 || m == 6 || m == 8){ # if n has any of these digits then no point checking for primeness
+      ans = 0
+      return ans
+    }
+    n = int(n / 10)
+  }
+  return ans
 }
