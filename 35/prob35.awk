@@ -8,22 +8,23 @@
 
 
 BEGIN {
-
-  num = 179
-  for (num = 1; num < 1000000; num += 2){
+  print(2) # 2 is known
+  for (num = 3; num < 1000000; num += 2){
     if(validate(num)){ # 1 - true, 0 - false
+      primeflag = 1
       # find all circulars of the number
       newnum = get_circular(num)
       if(isprime(newnum)){
         while(newnum != num){
           newnum = get_circular(newnum)
-          if(!isprime(newnum)){continue}
+          if(!isprime(newnum)){ primeflag=0 ; continue }
         }
-      }
-    }
-  }
+      }else{ primeflag=0 }
+      if(primeflag){ print(num) }
+    } # if valid
+  } #for loop
 
-}
+} #BEGIN
 
 
 function isprime(n){
@@ -68,3 +69,4 @@ function validate(n){
   }
   return ans
 }
+
